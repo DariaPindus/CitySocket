@@ -7,9 +7,9 @@ $(function() {
     function showMessage(mesg)
     {   /* response object */
         $('#data').append('<tr>' +
-            '<td>' + mesg.from + '</td>' +
-            '<td>' + mesg.topic + '</td>' +
-            '<td>' + mesg.message + '</td>' +
+            '<td>' + 'TEST' + '</td>' +
+            '<td>' + mesg.value + '</td>' +
+            '<td>' + mesg.type + '</td>' +
             '<td>' + mesg.time + '</td>' +
             '</tr>');
     }
@@ -37,10 +37,10 @@ $(function() {
     $('#connect,#disconnect,#value').prop('disabled', true);
 
     $('#connect').click(function() {
-        client = Stomp.over(new SockJS('/city'));
+        client = Stomp.client('ws://localhost:8181/output');
         client.connect({}, function (frame) {
             setConnected(true);
-            client.subscribe('/output', function (message) {
+            client.subscribe('/city/display', function (message) {
                 showMessage(JSON.parse(message.body));
             });
         });
@@ -56,9 +56,9 @@ $(function() {
 
     $('#send').click(function() {
         var sensorName = $('#sensorName').val();
-        client.send("/app/city/" + sensorName+".alter", {}, JSON.stringify({
-            from: $("#from").val(),
-            text: $('#value').val(),
+        client.send("/app/input", {}, JSON.stringify({
+            sensorName: $("#from").val(),
+            value: $('#value').val()
         }));
         $('#value').val("");
     });
