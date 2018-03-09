@@ -6,41 +6,45 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SensorMessage {
+    private String name;
+    private Object data;
+    private String time;
 
-        private String sensorName;
-        private boolean success;    //TODO: possibly not here
-        private int sensorData;
-        private String time;
+    public SensorMessage() {
+    }
 
-    public SensorMessage(){}
+    public SensorMessage(String sensorName, Object sensorData) {
+        this.name = sensorName;
+        this.data = sensorData;
+        this.time = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
+    }
 
-        public SensorMessage(String sensorName, int sensorData) {
-            this.sensorName = sensorName;
-            this.sensorData = sensorData;
-            this.time = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
-        }
+    public String getName() {
+        return name;
+    }
 
-        public String getSensorName() {
-            return sensorName;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setSensorName(String sensorName) {
-            this.sensorName = sensorName;
-        }
+    public Object getData() {
+        return data;
+    }
 
-        public boolean isSuccess() {
-            return success;
-        }
+    public void setData(Object data) {
+        this.data = data;
+    }
 
-        public void setSuccess(boolean success) {
-            this.success = success;
-        }
+    public String toString() {
+        return "name " + name + " , data " + data;
+    }
 
-        public int getSensorData(){
-            return sensorData;
-        }
+    public String getTime() {
+        return time;
+    }
 
-        public void setSensorData(int sensorData){
-            this.sensorData = sensorData;
-        }
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
+

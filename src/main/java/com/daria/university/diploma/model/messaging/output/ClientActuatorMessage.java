@@ -27,4 +27,8 @@ public class ClientActuatorMessage {
     public void setValue(Object value) {
         this.value = value;
     }
+
+    public String toString(){
+        return "sensorName " + sensorName + ", value " + value;
+    }
 }

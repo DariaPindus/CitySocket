@@ -1,6 +1,8 @@
 package com.daria.university.diploma.client;
 
 import com.daria.university.diploma.model.messaging.output.SensorMessage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
@@ -11,12 +13,20 @@ import java.lang.reflect.Type;
 
 @Slf4j
 public class MySessionHandler extends StompSessionHandlerAdapter {
+    ObjectMapper mapper = new ObjectMapper();
+
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
-        session.subscribe("/topic/greetings", this);
-        session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
+        //session.subscribe("/topic/greetings", this);
+        session.subscribe("/sensors/greetings", this);
+        //session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
+        try {
+            session.send("/app/output", mapper.writeValueAsBytes(new SensorMessage("test", "11")));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
-        log.info("New session: {}", session.getSessionId());
+        System.out.println("New session: {}" + session.getSessionId());
     }
 
     @Override
@@ -31,6 +41,6 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
 
     @Override
     public void handleFrame(StompHeaders headers, Object payload) {
-        log.info("Received: {}", ((SensorMessage) payload).getSensorName());
+        System.out.println("Received: {}" +  ((SensorMessage) payload));
     }
 }
