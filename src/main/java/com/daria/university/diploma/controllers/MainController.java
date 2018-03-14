@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 @Slf4j
 public class MainController {
 
-    @MessageMapping("/output")
+    @MessageMapping("/output") // + /{deviceId}
     @SendTo("/city/display")
     public ClientDisplayMessage first(SensorMessage message) throws Exception {
         //log.info("::::::::::::Received hello IN FIRST: {}::::::::::::", message.getName());
@@ -20,9 +20,17 @@ public class MainController {
         return new ClientDisplayMessage(Integer.valueOf((String)message.getData()));
     }
 
-    @MessageMapping("/input")
+    @MessageMapping("/input/sound") // + /{deviceId}
     @SendTo("/sensors/greetings")
-    public SensorMessage second(ClientActuatorMessage message) throws Exception {
+    public SensorMessage actuateSoundSensor(ClientActuatorMessage message) throws Exception {
+        //log.info("::::::::::::Received hello IN SECOND : {}::::::::::::", message.getName());
+        System.out.println("::::::::::::Received hello IN FIRST: {}::::::::::::" +  message);
+        return new SensorMessage(message.getSensorName(), message.getValue());
+    }
+
+    @MessageMapping("/input/sound") // + /{deviceId}
+    @SendTo("/sensors/greetings")
+    public SensorMessage actuateLightSensor(ClientActuatorMessage message) throws Exception {
         //log.info("::::::::::::Received hello IN SECOND : {}::::::::::::", message.getName());
         System.out.println("::::::::::::Received hello IN FIRST: {}::::::::::::" +  message);
         return new SensorMessage(message.getSensorName(), message.getValue());
