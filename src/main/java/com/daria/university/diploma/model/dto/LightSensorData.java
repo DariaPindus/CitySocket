@@ -8,14 +8,14 @@ import javax.persistence.Table;
 @Table(name = "light_data")
 public class LightSensorData {
 
-    @Column(name = "illuminance")
-    private double illuminance;
+    @Column(name = "luminosity")
+    private double luminosity;
 
-    public double getIlluminance() {
-        return illuminance;
+    public double getLuminosity() {
+        return luminosity;
     }
 
-    public void setIlluminance(double illuminance) {
-        this.illuminance = illuminance;
+    public void setLuminosity(double luminosity) {
+        this.luminosity = luminosity;
     }
 }
