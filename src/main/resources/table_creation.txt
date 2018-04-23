@@ -1,0 +1,33 @@
+
+
+CREATE TABLE "devices" (
+"id" serial not null primary key,
+"label" varchar (255),
+"type" varchar (100),
+"location_id"  integer references "locations" on update cascade
+on delete cascade,
+"active" boolean
+);
+
+CREATE TABLE "locations" (
+"id" serial not null primary key,
+"longitude" double precision,
+"latitude" double precision,
+"label" varchar (255)
+);
+
+CREATE TABLE "light_data" (
+"id" serial not null primary key,
+"time" timestamp,
+"device_id"  integer references "locations" on update cascade,
+"active" boolean,
+"luminosity" double precision
+);
+
+CREATE TABLE "sound_data" (
+"id" serial not null primary key,
+"time" timestamp,
+"device_id"  integer references "locations" on update cascade,
+"active" boolean,
+"db" double precision
+);

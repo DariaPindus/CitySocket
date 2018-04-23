@@ -2,7 +2,7 @@ package com.daria.university.diploma.model.messaging.output;
 
 
 public class ClientActuatorMessage {
-    private String sensorName;
+    /*private String sensorName;
     private Object value;
 
     public ClientActuatorMessage(){}
@@ -30,5 +30,28 @@ public class ClientActuatorMessage {
 
     public String toString(){
         return "sensorName " + sensorName + ", value " + value;
+    }*/
+    private String deviceId;
+    private Object data;
+    private ServerActionType actionType;
+
+    public ClientActuatorMessage(){}
+
+    public ClientActuatorMessage(String deviceId, Object data, ServerActionType actionType) {
+        this.deviceId = deviceId;
+        this.data = data;
+        this.actionType = actionType;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public ServerActionType getActionType() {
+        return actionType;
     }
 }
