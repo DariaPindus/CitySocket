@@ -8,6 +8,7 @@ import com.daria.university.diploma.service.UserActionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -63,4 +64,12 @@ public class MainController {
         //userActionService.registerAction(message);
         return message;
     }
+
+    @MessageExceptionHandler
+    @SendTo("/city/display/error")
+    public String handleException(IllegalArgumentException ex) {
+        return "Got error: " + ex.getMessage();
+    }
+
+
 }

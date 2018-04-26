@@ -15,9 +15,9 @@ public class UserAction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     @ManyToOne
-    private String user;
+    private User user;
 
     @Column(name = "action")
     @NotNull
@@ -29,7 +29,7 @@ public class UserAction {
     public UserAction(){
     }
 
-    public UserAction(String user, String actionType) {
+    public UserAction(User user, String actionType) {
         this.user = user;
         this.actionType = actionType;
     }
@@ -42,11 +42,11 @@ public class UserAction {
         this.id = id;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @MappedSuperclass
 public class SensorData {
@@ -17,15 +18,14 @@ public class SensorData {
     private Device device;
 
     @Column(name = "time")
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTimeTZ")
-    private DateTime time;
+    private Timestamp time;
 
     public SensorData() {
     }
 
     public SensorData(Device device, DateTime time) {
         this.device = device;
-        this.time = time;
+        this.time = new Timestamp(time.getMillis());
     }
 
     public Long getId() {
@@ -41,10 +41,10 @@ public class SensorData {
     }
 
     public DateTime getTime() {
-        return time;
+        return new DateTime(time.getTime());
     }
 
     public void setTime(DateTime time) {
-        this.time = time;
+        this.time = new Timestamp(time.getMillis());
     }
 }

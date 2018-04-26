@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "light_data")
-public class LightSensorData {
+public class LightSensorData extends SensorData {
 
     @Column(name = "luminosity")
     private double luminosity;
