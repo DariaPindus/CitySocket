@@ -4,15 +4,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "devices")
-public class Device {
+public class Device implements IEntity{
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    private String id;
+    private Long id;
 
     @NotEmpty
     private String label;
@@ -30,14 +31,14 @@ public class Device {
     public Device() {
     }
 
-    public Device(String id, String label, String type, Location location) {
-        this.id = id;
+    public Device(String label, String type, Location location) {
+        //this.id = id;
         this.label = label;
         this.type = type;
         this.location = location;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
