@@ -2,8 +2,8 @@ package com.daria.university.diploma.service;
 
 import com.daria.university.diploma.model.dto.Role;
 import com.daria.university.diploma.model.dto.User;
-import com.daria.university.diploma.repositories.RoleRepository;
-import com.daria.university.diploma.repositories.UserRepository;
+import com.daria.university.diploma.repository.RoleRepository;
+import com.daria.university.diploma.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

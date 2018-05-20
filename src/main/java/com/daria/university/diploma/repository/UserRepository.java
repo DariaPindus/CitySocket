@@ -1,4 +1,4 @@
-package com.daria.university.diploma.repositories;
+package com.daria.university.diploma.repository;
 
 import com.daria.university.diploma.model.dto.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SoundSensorDataRepository extends CrudRepository<SoundSensorData, Long>{
+public interface SoundSensorDataRepository extends AbstractRepository<SoundSensorData, Long>{
 }

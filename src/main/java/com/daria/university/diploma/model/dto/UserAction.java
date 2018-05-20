@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user_actions")
-public class UserAction {
+public class UserAction implements IEntity{
 
     @Id
     @Column(name = "id")

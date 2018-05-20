@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 
 @Service
-public class LocationService {
+public class LocationService extends AbstractService<Location, Long> {
 
     @Autowired
     LocationRepository repository;
+
+    public LocationService(){
+        setDao(repository);
+    }
 
     @PostConstruct
     public void init(){

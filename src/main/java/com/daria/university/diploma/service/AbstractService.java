@@ -40,11 +40,11 @@ public abstract class AbstractService<T extends Serializable, ID  extends Serial
         return repository.findAll();
     }
 
-    @Transactional
+    /*@Transactional
     @Override
     public Optional<T> findByName(String name) {
         return repository.findOneByName(name);
-    }
+    }*/
 
     @Override
     @Transactional

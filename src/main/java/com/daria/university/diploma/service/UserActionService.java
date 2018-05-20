@@ -5,12 +5,13 @@ import com.daria.university.diploma.repository.UserActionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
-public class UserActionService {
+public class UserActionService extends AbstractService<UserAction, Long>{
     @Autowired
     UserActionRepository repository;
 
-    public void registerAction(UserAction action){
-        repository.save(action);
+    public UserActionService(){
+        setDao(repository);
     }
 }
