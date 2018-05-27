@@ -25,6 +25,9 @@
 
 		<log4j.version>1.2.17</log4j.version>
 		<slf4j.version>1.7.13</slf4j.version>
+		<frontend-plugin.version>0.0.27</frontend-plugin.version>
+		<node.version>v6.13.0</node.version>
+		<npm.version>3.10.10</npm.version>
 	</properties>
 
 	<dependencies>
@@ -193,8 +196,12 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.2</version>
+				<version>${frontend-plugin.version}</version>
 				<configuration>
+					<workingDirectory>src/main/frontend</workingDirectory>
+					<nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
+					<nodeVersion>${node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
 					<installDirectory>target</installDirectory>
 				</configuration>
 				<executions>
@@ -203,10 +210,7 @@
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
-						<configuration>
-							<nodeVersion>v4.4.5</nodeVersion>
-							<npmVersion>3.9.2</npmVersion>
-						</configuration>
+						<phase>generate-resources</phase>
 					</execution>
 					<execution>
 						<id>npm install</id>
@@ -215,6 +219,7 @@
 						</goals>
 						<configuration>
 							<arguments>install</arguments>
+							<installDirectory>target</installDirectory>
 						</configuration>
 					</execution>
 					<execution>
