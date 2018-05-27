@@ -1,65 +1,34 @@
+import React, { Component }  from 'react';
+import ReactDOM from 'react-dom';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
 
-$(function() {
-    'use strict';
-
-    var client;
-
-    function showMessage(mesg)
-    {   /* response object */
-        $('#data').append('<tr>' +
-            '<td>' + 'TEST' + '</td>' +
-            '<td>' + mesg.value + '</td>' +
-            '<td>' + mesg.type + '</td>' +
-            '<td>' + mesg.time + '</td>' +
-            '</tr>');
-    }
-
-    function setConnected(connected) {
-        $("#connect").prop("disabled", connected);
-        $("#disconnect").prop("disabled", !connected);
-        $('#from').prop('disabled', connected);
-        $('#value').prop('disabled', !connected);
-        if (connected) {
-            $("#conversation").show();
-            $('#value').focus();
+import LoginScreen from '/static/js/auth/Loginscreen';
+class App extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            loginPage:[],
+            uploadScreen:[]
         }
-        else $("#conversation").hide();
-        $("#data").html("");
     }
+    componentWillMount(){
+        var loginPage =[];
+        loginPage.push(<LoginScreen appContext={this}/>);
+        this.setState({
+            loginPage:loginPage
+        })
+    }
+    render() {
+        return (
+            <div className="App">
+                {this.state.loginPage}
+                {this.state.uploadScreen}
+            </div>
+        );
+    }
+}
 
-    $("form").on('submit', function (e) {
-        e.preventDefault();
-    });
+export default App;
 
-    $('#from').on('blur change keyup', function(ev) {
-        $('#connect').prop('disabled', $(this).val().length == 0 );
-    });
-    $('#connect,#disconnect,#value').prop('disabled', true);
-
-    $('#connect').click(function() {
-        client = Stomp.client('ws://localhost:8181/output');
-        client.connect({}, function (frame) {
-            setConnected(true);
-            client.subscribe('/city/display', function (message) {
-                showMessage(JSON.parse(message.body));
-            });
-        });
-    });
-
-    $('#disconnect').click(function() {
-        if (client != null) {
-            client.disconnect();
-            setConnected(false);
-        }
-        client = null;
-    });
-
-    $('#send').click(function() {
-        var sensorName = $('#sensorName').val();
-        client.send("/app/input", {}, JSON.stringify({
-            sensorName: $("#from").val(),
-            value: $('#value').val()
-        }));
-        $('#value').val("");
-    });
-});
+ReactDOM.render(<App />, document.getElementById('react') );

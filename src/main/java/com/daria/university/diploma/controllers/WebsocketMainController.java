@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @Slf4j
-public class MainController {
+public class WebsocketMainController {
 
     @Autowired
     SensorDataService sensorDataService;
