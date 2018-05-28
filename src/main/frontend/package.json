@@ -1,8 +1,16 @@
-{
+@material-ui/core{
   "name": "frontend",
   "version": "1.0.0",
   "description": "Starter app ",
   "main": "index.js",
+  "browser": {
+    "material-ui": "./components/material-ui/src/index.js"
+  },
+  "browserify": {
+    "transform": [
+      ["reactify", {"es6": true}]
+    ]
+  },
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --hot --inline ",
@@ -22,7 +30,12 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.8.1",
-    "webpack-merge": "^0.8.4"
+    "webpack-merge": "^0.8.4",
+    "browser-sync": "^1.6.5",
+    "browserify": "^6.3.2", 
+    "react-autosuggest" : "latest", 
+    "autosuggest-highlight" : "^3.1.1", 
+    "material-ui-filter" : "latest"
   },
   "dependencies": {
     "axios": "^0.9.1",
@@ -37,6 +50,9 @@
     "react-router-redux": "^4.0.4",
     "redux": "^3.3.1",
     "redux-simple-router": "^2.0.4",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "@material-ui/core": "1.1.0", 
+    "@material-ui/icons" : "1.1.0"
   }
 }
