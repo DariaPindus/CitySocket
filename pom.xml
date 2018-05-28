@@ -192,6 +192,7 @@
 					<addResources>true</addResources>
 				</configuration>
 			</plugin>
+<!--
 
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -230,6 +231,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 
 			<!--<plugin>
 				<groupId>com.mysema.maven</groupId>

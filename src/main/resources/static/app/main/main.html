@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search sensor" ng-model="vm.model.searchSensor">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <md-list-item class="md-3-line" ng-repeat="sens in vm.sensors| filter:vm.model.searchSensor" ng-click="vm.gotoRecord(sens.id)">
+        <img ng-src="{{'/assets/' + sens.state + '.png'}}" class="md-avatar" alt="{{sens.state}}">
+        <div class="md-list-item-text" layout="column">
+            <h3>{{ sens.name }}</h3>
+            <h4>{{ sens.location.label }}</h4>
+            <p>Long : {{ sens.location.longitude }} Lat : {{sens.location.latitude}}</p>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+</div>
