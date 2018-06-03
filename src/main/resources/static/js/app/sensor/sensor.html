@@ -1,6 +1,6 @@
 <li class="media">
     <a class="pull-left" href="#">
-        <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+        <img class="media-object img-circle" src="../assets/city.jpeg" width="128px" alt="profile">
     </a>
 <div class="media-body">
     <div class="well well-lg" ng-if="vm.mode == 'view'">
@@ -16,10 +16,14 @@
 
 
         <p class="media-comment">
-            {{vm.sensor.location}}
+            {{vm.sensor.location.label}}
         </p>
-        <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply" ng-click="vm.mode = 'edit'"><span class="glyphicon glyphicon-share-alt"></span> Edit sensor</a>
-        <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne" ng-click="vm.setValue()"><span class="glyphicon glyphicon-comment"></span> Send signals</a>
+        <md-button class="md-primary md-raised" ng-click="vm.doActionsModal($event)">
+            Do actions
+        </md-button>
+        <!--<a class="btn btn-info btn-circle text-uppercase" href="#" id="reply" ng-click="vm.mode = 'edit'"><span class="glyphicon glyphicon-share-alt"></span> Edit sensor</a>
+        <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne" ng-click="vm.setValue()"><span class="glyphicon glyphicon-comment"></span> Send signals</a>-->
+
     </div>
     <div class="well well-lg" ng-if="vm.mode == 'edit'">
         <h4 class="media-heading text-uppercase reviews">{{vm.sensor.name}}</h4>
@@ -31,6 +35,13 @@
         <p class="media-comment">
             {{vm.sensor.location}}
         </p>
+
+        <div ng-if="vm.status" id="status">
+            <b layout="row" layout-align="center center" class="md-padding">
+                {{vm.status}}
+            </b>
+        </div>
+
         <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply" ng-click="vm.mode = 'edit'"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
         <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> 2 comments</a>
     </div>
@@ -67,3 +78,33 @@
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Mango (Fruit)">
+<form ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Location actions</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <h2>Would you like to execute following actions?</h2>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+        <md-button ng-click="callPolice()">
+            Call police
+        </md-button>
+        <md-button ng-click="turnSiren()">
+            Turn siren
+        </md-button>
+    </md-dialog-actions>
+</form>
+</md-dialog>

@@ -13,16 +13,18 @@ public class ClientMainDisplayMessage implements Serializable {
     private String location;
     private Object value;
     private String state;
+    private long time;
 
     public ClientMainDisplayMessage(){}
 
-    public ClientMainDisplayMessage(Device device, Object value, String state) {
+    public ClientMainDisplayMessage(Device device, Object value, String state, long time) {
         this.type = device.getType();
         this.deviceId = device.getId();
         this.deviceName = device.getLabel();
         this.location = device.getLocation().getLabel();
         this.value = value;
         this.state = state;
+        this.time = time;
     }
 
     public String getType() {
@@ -71,5 +73,13 @@ public class ClientMainDisplayMessage implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

@@ -29,6 +29,7 @@ public abstract class SensorData implements IEntity{
 
     public SensorData(Device device) {
         this.device = device;
+        this.time = TimeUtil.getCurrentTime();
     }
 
     public SensorData(Device device, Timestamp time) {

@@ -1,23 +1,18 @@
 package com.daria.university.diploma.controllers;
 
-import com.daria.university.diploma.model.Response;
+import com.daria.university.diploma.model.UpdateRequestPair;
 import com.daria.university.diploma.model.dto.Device;
 import com.daria.university.diploma.model.dto.SensorData;
 import com.daria.university.diploma.service.DeviceService;
 import com.daria.university.diploma.service.SensorDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,8 +55,12 @@ public class RestMainController {
     }
 */
     @RequestMapping(value = "/olddata", method = RequestMethod.GET)
-    public ResponseEntity<List<SensorData>> getOldData(){
-        List<SensorData> resultData = dataService.getDataForLastDays(numberOfDays);
+    public ResponseEntity<List<SensorData>> getOldData(@RequestParam(name = "id", defaultValue = "-1", required = false) long id){
+        List<SensorData> resultData;
+        if (id == -1)
+            resultData = dataService.getDataForLastDays(numberOfDays);
+        else
+            resultData = dataService.getDataForLastDaysById(numberOfDays, id);
         return new ResponseEntity<>(resultData, HttpStatus.OK);
     }
 
@@ -71,4 +70,42 @@ public class RestMainController {
         return new ResponseEntity<>(resultData, HttpStatus.OK);
     }
 
+/*
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    public ResponseEntity updateDevice(@PathVariable("id") long id, @RequestBody Device device) {
+        Device saved = deviceService.save(device);
+        return new ResponseEntity(saved, HttpStatus.OK);
+    }
+*/
+
+    @RequestMapping("/sensors/{id}")
+    public ResponseEntity<Device> getDevice(@PathVariable("id") long id){
+        if (!deviceService.findById(id).isPresent())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        Device device = deviceService.findById(id).get();
+        return new ResponseEntity<>(device, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
+    public ResponseEntity updateDeviceFields(@PathVariable("id") long id, @RequestBody UpdateRequestList updateRequest) throws NoSuchFieldException {
+
+        Class  aClass = Device.class;
+        Device device = new Device(id);
+        updateRequest.forEach(req -> {
+            Field field = null;
+            try {
+                field = aClass.getField(req.getFieldName());
+                field.set(device, req.getValue());
+            } catch (NoSuchFieldException |IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Device saved = deviceService.update(device);
+
+        return new ResponseEntity(saved, HttpStatus.OK);
+    }
+
+    static class UpdateRequestList extends ArrayList<UpdateRequestPair>{}
 }

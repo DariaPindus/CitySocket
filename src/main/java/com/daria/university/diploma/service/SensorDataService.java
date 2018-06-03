@@ -74,6 +74,14 @@ public class SensorDataService {
         return result;
     }
 
+    @Transactional
+    public List<SensorData> getDataForLastDaysById(int nDays, long id) {
+        List<SensorData> result = new ArrayList<>();
+        Timestamp timestamp = TimeUtil.getDaysBefore(nDays);
+        result.addAll(soundSensorDataRepository.findByDeviceAndTimeAfter(id, timestamp));
+        result.addAll(lightSensorDataRepository.findByDeviceAndTimeAfter(id, timestamp));
+        return result;
+    }
 
     @Transactional
     public List<SensorData> getAll(){

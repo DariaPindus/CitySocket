@@ -156,3 +156,6 @@ i {
     border-color: white;
     margin-top: 24px;
 }
+
+div#status {
+    color: #c60008; }

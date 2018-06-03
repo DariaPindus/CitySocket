@@ -6,6 +6,7 @@ function APISrv($http) {
     var service = {
         getAllSensors : getAllSensors,
         getOldData : getOldData,
+        getOldDataById : getOldDataById,
         getCurrentSensors : getCurrentSensors,
         getSensor : getSensor,
         getLocations : getLocations,
@@ -23,6 +24,10 @@ function APISrv($http) {
 
     function getOldData() {
         return $http.get(server_uri + '/olddata');
+    }
+
+    function getOldDataById(deviceId) {
+        return $http.get(server_uri + '/olddata?id=' + deviceId);
     }
     /* possible states correspond the name of assets : ok, warning and danger (in order of urgency raise)
      * response type :
@@ -45,7 +50,12 @@ function APISrv($http) {
     }
 
     function changeSensorField(id, field, value) {
-        return $http.get(server_uri + '/sensor/' + id + '?' + field + '=' + value);
+        //return $http.get(server_uri + '/sensor/' + id + '?' + field + '=' + value);
+        return  $http.post(server_uri + '/' + id + '/update', updateList);
+    }
+    
+    function updateFields(updateList) {
+        return $http.post(server_uri + '/' + id + '/update', updateList);
     }
 }
 

@@ -8,6 +8,7 @@ public class ClientMainDisplayMessageAdapter extends ClientMainDisplayMessage {
     public ClientMainDisplayMessageAdapter(SensorData data){
         super(data.getDevice(),
                 data.getDefaultData(),
-                SensorStateConverter.getSensorState(data.getDevice().getType(),data.getDefaultData()));
+                SensorStateConverter.getSensorState(data.getDevice().getType(),data.getDefaultData()),
+                data.getTime().getMillis());
     }
 }
