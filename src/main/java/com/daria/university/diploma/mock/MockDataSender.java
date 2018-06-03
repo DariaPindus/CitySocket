@@ -3,6 +3,9 @@ package com.daria.university.diploma.mock;
 
 import com.daria.university.diploma.model.dto.Device;
 import com.daria.university.diploma.model.dto.Location;
+import com.daria.university.diploma.model.dto.SoundSensorData;
+import com.daria.university.diploma.model.messaging.output.ClientMainDisplayMessage;
+import com.daria.university.diploma.model.messaging.output.ClientMainDisplayMessageAdapter;
 import com.daria.university.diploma.model.messaging.output.SensorMessage;
 import com.daria.university.diploma.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,14 @@ public class MockDataSender {
                         x -> x.getId(), x -> x));
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 10000)
     public void sendMockData(){
         devices.forEach((key, val)->{
                 SensorMessage mess = getMockMessage(val);
             System.out.println("mesage " + mess.getName() + " " + mess.getData() + " " + mess.getTime());
-                messagingTemplate.convertAndSend("/city/display", mess);
+            double rand = new Random().nextDouble() * 100;
+            ClientMainDisplayMessage message = new ClientMainDisplayMessageAdapter(new SoundSensorData(val, rand));
+                messagingTemplate.convertAndSend("/city/display", message);
         });
     }
 

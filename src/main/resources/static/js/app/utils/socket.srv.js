@@ -11,7 +11,7 @@ function SocketSrv(StompClient, $q,  $timeout){
 
     var service = {
         RECONNECT_TIMEOUT : 30000,
-        SOCKET_URL : "/output",  //"/spring-ng-chat/chat", ws://localhost:8181
+        SOCKET_URL : "ws://localhost:8181/output",  //"/spring-ng-chat/chat", ws://localhost:8181
         INCOMING_URL : "/city/display",
 
         initialize : initialize,
@@ -60,7 +60,7 @@ function SocketSrv(StompClient, $q,  $timeout){
 
     function startListener () {
         socket.stomp.subscribe(service.INCOMING_URL, function(data) {
-            listener.notify(data.body);
+            listener.notify(JSON.parse(data.body));
         });
     }
 

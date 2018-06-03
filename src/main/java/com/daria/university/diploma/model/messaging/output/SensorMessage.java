@@ -3,11 +3,12 @@ package com.daria.university.diploma.model.messaging.output;
 
 import com.daria.university.diploma.model.dto.Device;
 
+import java.io.Serializable;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class SensorMessage {
+public class SensorMessage implements Serializable{
     protected String name;
     protected Object data;
     protected Long deviceId;

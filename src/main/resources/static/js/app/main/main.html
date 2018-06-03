@@ -1,24 +1,60 @@
 
 MAIN
-<div class="container">
-    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <form>
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <input type="text" class="form-control" placeholder="Search sensor" ng-model="vm.model.searchSensor">
+
+    <div id="sensors_body">
+        <!--<md-list-item class="md-3-line" ng-repeat="sens in vm.data| filter:vm.model.searchSensor" ng-click="vm.gotoRecord(sens.id)">-->
+            <!--<img ng-src="{{'/assets/' + sens.state + '.png'}}" class="md-avatar" alt="{{sens.state}}">-->
+            <!--<div class="md-list-item-text" layout="column">-->
+                <!--<h3>{{ sens.label }}</h3>-->
+                <!--<h4>{{ sens.location.label }}</h4>-->
+                <!--&lt;!&ndash;<p>Long : {{ sens.location.longitude }} Lat : {{sens.location.latitude}}</p>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</md-list-item>-->
+        <!--<md-divider></md-divider>-->
+
+        <md-toolbar class="md-tall" layout="column"><span flex="flex"></span>
+            <div class="md-toolbar-tools">
+                <div class="fill-height" layout="row" flex="flex">
+                    <div class="md-toolbar-item md-breadcrumb" ng-hide="vm.toggleSearch"><span ng-click="vm.toggleSearch = !vm.toggleSearch">Angular Material Table</span></div><span flex="flex" ng-hide="vm.toggleSearch"></span>
+                    <md-input-container flex="flex" style="padding-left:88px;" ng-show="vm.toggleSearch">
+                        <input id="searchinput" type="text" ng-model="vm.search" show-focus="vm.toggleSearch"/>
+                    </md-input-container>
+                    <div class="md-toolbar-item md-tools" layout="row"><a class="md-button md-default-theme" href="#" ng-click="vm.toggleSearch = !vm.toggleSearch"><i class="ion-android-search"></i></a></div>
                 </div>
             </div>
-        </form>
-    </div>
-
-    <md-list-item class="md-3-line" ng-repeat="sens in vm.sensors| filter:vm.model.searchSensor" ng-click="vm.gotoRecord(sens.id)">
-        <img ng-src="{{'/assets/' + sens.state + '.png'}}" class="md-avatar" alt="{{sens.state}}">
-        <div class="md-list-item-text" layout="column">
-            <h3>{{ sens.name }}</h3>
-            <h4>{{ sens.location.label }}</h4>
-            <p>Long : {{ sens.location.longitude }} Lat : {{sens.location.latitude}}</p>
+        </md-toolbar>
+        <md-content layout="column" flex="flex" ng-click="vm.toggleSearch=false">
+            <md-table headers="vm.headers" content="vm.data" sortable="vm.sortable" filters="vm.search" custom-class="vm.custom" thumbs="vm.thumbs" count="vm.count"></md-table>
+        </md-content>
+        </body>
+        </html>
+        <!-- md-table jade template-->
+        <div id="md-table-template" ng-hide="true">
+            <table class="md-table" md-colresize="md-colresize">
+                <thead>
+                <tr class="md-table-headers-row">
+                    <th class="md-table-header" ng-repeat="h in headers"><a href="#" ng-if="handleSort(h.field)" ng-click="reverse=!reverse;order(h.field,reverse)">{{h.name}} <i class="ion-android-arrow-dropup" ng-show="reverse && h.field == predicate"></i><i class="ion-android-arrow-dropdown" ng-show="!reverse && h.field == predicate"></i></a><span ng-if="!handleSort(h.field)">{{h.name}}</span></th>
+                    <th class="md-table-header"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="md-table-content-row" ng-repeat="c in content | filter:filters | startFrom:tablePage*count | limitTo: count">
+                    <td>
+                        <div class="md-table-thumbs" ng-repeat="h in headers" ng-if="h.field == thumbs">
+                            <div style="background-image:url({{c.thumb}});"></div>
+                        </div>
+                    </td>
+                    <td class="md-table-content" ng-repeat="h in headers" ng-class="customClass[h.field]" ng-if="h.field != thumbs">{{(h.field.indexOf('date') > 0) ? $filter('date')(c[h.field]) : c[h.field];}}</td>
+                    <td class="md-table-td-more">
+                        <md-button aria-label="Info"><i class="ion-android-more-vertical"></i></md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="md-table-footer" layout="row"><span class="md-table-count-info">Rows per page : <a href="#" ng-click="goToPage(0); count=10">10</a>,<a href="#" ng-click="goToPage(0); count=25">25</a>,<a href="#" ng-click="goToPage(0); count=50">50</a>,<a href="#" ng-click="goToPage(0); count=100">100</a>(current is {{count}})</span><span flex="flex"></span><span ng-show="nbOfPages() &gt; 1">
+      <md-button class="md-primary md-hue-2" ng-disabled="tablePage==0" ng-click="tablePage=tablePage-1" aria-label="Previous Page"><i class="ion-chevron-left" style="font-size:16px;"></i></md-button><a href="#" ng-repeat="i in getNumber(nbOfPages()) track by $index">
+        <md-button class="md-primary md-hue-2 md-table-footer-item" ng-click="goToPage($index)"><span ng-class="{ 'md-table-active-page': tablePage==$index}">{{$index+1}}</span></md-button></a>
+      <md-button class="md-primary md-hue-2" ng-disabled="tablePage==nbOfPages()-1" ng-click="tablePage=tablePage+1" aria-label="Next Page"><i class="ion-chevron-right" style="font-size:16px;"></i></md-button></span></div>
         </div>
-    </md-list-item>
-    <md-divider></md-divider>
+    </div>
 </div>
