@@ -19,9 +19,9 @@ public class LocationService extends AbstractService<Location, Long> {
 
     @PostConstruct
     public void init(){
-        repository.save(new Location(46.484864, 30.735370, "Hrecheskaya st."));
+        /*repository.save(new Location(46.484864, 30.735370, "Hrecheskaya st."));
         repository.save(new Location(46.484515, 30.730778, "Deribasovskaya St., 11"));
-        repository.save(new Location(46.480149, 30.731370, "Tirapolskaya sq."));
+        repository.save(new Location(46.480149, 30.731370, "Tirapolskaya sq."));*/
     }
 
     public Location save(Location location){

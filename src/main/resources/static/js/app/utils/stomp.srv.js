@@ -52,4 +52,4 @@ function StompClient($q){
 
 }
 
-angulat.module('App').factory('StompClient', StompClient);
+angular.module('App').factory('StompClient', StompClient);

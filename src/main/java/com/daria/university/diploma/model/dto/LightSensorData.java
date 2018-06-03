@@ -13,6 +13,11 @@ public class LightSensorData extends SensorData {
 
     public LightSensorData(){}
 
+    @Override
+    public Object getDefaultData() {
+        return luminosity;
+    }
+
     public LightSensorData(Device device, double luminosity){
         super(device);
         this.luminosity = luminosity;

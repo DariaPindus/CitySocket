@@ -1,6 +1,5 @@
-MainCtr.$inject = ['$scope','$location', 'APISrv'];
 
-function MainCtr($scope, $location,  APISrv, data) {
+function MainCtr($scope, $location,  APISrv, SocketSrv, data) {
 
     var vm = this;
     vm.model = {
@@ -19,6 +18,10 @@ function MainCtr($scope, $location,  APISrv, data) {
     vm.gotoRecord = function (id) {
         $location.path('/sensor/' + id);
     }
+
+    SocketSrv.receive().then(null, null, function(message) {
+        vm.data.push(message);
+    });
 }
 
 angular.module('App').controller('MainCtr', MainCtr);

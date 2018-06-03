@@ -37,18 +37,18 @@ public class MockDataSender {
                         x -> x.getId(), x -> x));
     }
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(fixedDelay = 5000)
     public void sendMockData(){
         devices.forEach((key, val)->{
                 SensorMessage mess = getMockMessage(val);
             System.out.println("mesage " + mess.getName() + " " + mess.getData() + " " + mess.getTime());
-                messagingTemplate.convertAndSend("/output/" + key, mess);
+                messagingTemplate.convertAndSend("/city/display", mess);
         });
     }
 
     public SensorMessage getMockMessage(Device d){;
         int val = new Random().nextInt(100);
-        return new SensorMessage(d.getLabel(), d.getId(), val);
+        return new SensorMessage(d, val);
     }
 
 }

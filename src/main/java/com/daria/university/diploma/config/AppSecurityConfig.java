@@ -36,7 +36,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         return bCryptPasswordEncoder;
     }
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.
@@ -46,7 +46,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(bCryptPasswordEncoder);
     }
-
+*/
     /*
     //todo: try this in case doesn't work
     @Autowired

@@ -40,7 +40,7 @@ public class ServiceClient {
                 break;
             }
 
-            session.send("/app/output", mapper.writeValueAsBytes(new SensorMessage("test", 0L, input)));
+            session.send("/app/output", mapper.writeValueAsBytes(new SensorMessage("test", 0L, "sound", input)));
         }
 
         scanner.close();

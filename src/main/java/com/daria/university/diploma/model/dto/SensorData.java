@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @MappedSuperclass
 //@Entity
 //@Inheritance
-public class SensorData implements IEntity{
+public abstract class SensorData implements IEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
@@ -29,6 +29,11 @@ public class SensorData implements IEntity{
 
     public SensorData(Device device) {
         this.device = device;
+    }
+
+    public SensorData(Device device, Timestamp time) {
+        this.device = device;
+        this.time = time;
     }
 
     public Long getId() {
@@ -50,6 +55,8 @@ public class SensorData implements IEntity{
     public void setTime(DateTime time) {
         this.time = new Timestamp(time.getMillis());
     }
+
+    public abstract Object getDefaultData();
 
     @PrePersist
     public void prePersist(){

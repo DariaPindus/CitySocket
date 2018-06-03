@@ -13,6 +13,11 @@ public class SoundSensorData extends SensorData {
 
     public SoundSensorData(){}
 
+    @Override
+    public Object getDefaultData() {
+        return db;
+    }
+
     public SoundSensorData(Device device, double db){
         super(device);
         this.db = db;

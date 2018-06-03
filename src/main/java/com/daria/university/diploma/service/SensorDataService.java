@@ -1,6 +1,7 @@
 package com.daria.university.diploma.service;
 
 import com.daria.university.diploma.model.dto.*;
+import com.daria.university.diploma.model.messaging.output.SensorMessage;
 import com.daria.university.diploma.repository.LightSensorDataRepository;
 import com.daria.university.diploma.repository.SoundSensorDataRepository;
 import com.daria.university.diploma.utils.TimeUtil;
@@ -41,12 +42,27 @@ public class SensorDataService {
         }
     }
 
+    //todo: dirty, make it clearer
     @Transactional
-    public void saveSensorData(String type, SensorData data){
+    public SensorData saveSensorMessage(SensorMessage message){
+        SensorData res = null;
+        if (message.getType() == "sound"){
+            res = new SoundSensorData(new Device(message.getDeviceId()), (double)message.getData());
+        }
+        if (message.getType() == "light"){
+            res = new LightSensorData(new Device(message.getDeviceId()), (double)message.getData());
+        }
+        return saveSensorData(message.getType(), res);
+    }
+
+    @Transactional
+    public SensorData saveSensorData(String type, SensorData data){
+        SensorData res = null;
         if (type == "sound")
-            soundSensorDataRepository.save((SoundSensorData)data);  //todo : check it saves all fields
+            res = soundSensorDataRepository.save((SoundSensorData)data);  //todo : check it saves all fields
         if (type == "light")
-            lightSensorDataRepository.save((LightSensorData)data);
+            res = lightSensorDataRepository.save((LightSensorData)data);
+        return res;
     }
 
     @Transactional
