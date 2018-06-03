@@ -22,8 +22,8 @@ public class WebsocketMainController {
 
     @Autowired
     UserActionService userActionService;
-    /*
-    @MessageMapping("/output") // + /{deviceId}
+
+    @MessageMapping("/output")
     @SendTo("/city/display")
     public ClientDisplayMessage first(SensorMessage message) throws Exception {
         //log.info("::::::::::::Received hello IN FIRST: {}::::::::::::", message.getName());
@@ -31,22 +31,15 @@ public class WebsocketMainController {
         return new ClientDisplayMessage(Integer.valueOf((String)message.getData()));
     }
 
-    @MessageMapping("/input/sound") // + /{deviceId}
+    @MessageMapping("/input")
     @SendTo("/sensors/greetings")
-    public SensorMessage actuateSoundSensor(ClientActuatorMessage message) throws Exception {
+    public SensorMessage second(ClientActuatorMessage message) throws Exception {
         //log.info("::::::::::::Received hello IN SECOND : {}::::::::::::", message.getName());
         System.out.println("::::::::::::Received hello IN FIRST: {}::::::::::::" +  message);
         return new SensorMessage(message.getSensorName(), message.getValue());
     }
 
-    @MessageMapping("/input/sound") // + /{deviceId}
-    @SendTo("/sensors/greetings")
-    public SensorMessage actuateLightSensor(ClientActuatorMessage message) throws Exception {
-        //log.info("::::::::::::Received hello IN SECOND : {}::::::::::::", message.getName());
-        System.out.println("::::::::::::Received hello IN FIRST: {}::::::::::::" +  message);
-        return new SensorMessage(message.getSensorName(), message.getValue());
-    }
-*/
+/*
     @MessageMapping("/output/{type}")
     @SendTo("/city/display")
     public ClientDisplayMessage first(@DestinationVariable String type, SensorMessage message) throws Exception {
@@ -70,6 +63,7 @@ public class WebsocketMainController {
     public String handleException(IllegalArgumentException ex) {
         return "Got error: " + ex.getMessage();
     }
+*/
 
 
 }

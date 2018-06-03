@@ -1,6 +1,7 @@
 package com.daria.university.diploma.model.dto;
 
 import com.daria.university.diploma.utils.TimeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @MappedSuperclass
+//@Entity
+//@Inheritance
 public class SensorData implements IEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

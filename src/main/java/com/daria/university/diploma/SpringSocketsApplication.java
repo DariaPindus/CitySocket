@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("com.daria.university.diploma.model.*")*/
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableScheduling
 public class SpringSocketsApplication {
 
 	public static void main(String[] args) {

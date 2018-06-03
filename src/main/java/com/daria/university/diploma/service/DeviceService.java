@@ -23,15 +23,17 @@ public class DeviceService extends AbstractService<Device, Long>{
     @PostConstruct
     public void postConstruct(){
 
-        Device device1 = new Device("super device 1", "sound", new Location(46.484864, 30.735370, "Hrecheskaya st."));
-        Device device2 = new Device("super device 2", "sound", new Location(46.484864, 30.735370, "Deribasovskaya st."));
-        Device device3 = new Device("super device 3", "light", new Location(46.484864, 30.735370, "Bunina st."));
+        if(repository.findAll().isEmpty()) {
+            Device device1 = new Device("super device 1", "sound", new Location(46.484864, 30.735370, "Hrecheskaya st."));
+            Device device2 = new Device("super device 2", "sound", new Location(46.484864, 30.735370, "Deribasovskaya st."));
+            Device device3 = new Device("super device 3", "light", new Location(46.484864, 30.735370, "Bunina st."));
 
-        List<Device> devices = new ArrayList<>();
-        devices.add(device1);
-        devices.add(device2);
-        devices.add(device3);
+            List<Device> devices = new ArrayList<>();
+            devices.add(device1);
+            devices.add(device2);
+            devices.add(device3);
 
-        repository.save(devices);
+            repository.save(devices);
+        }
     }
 }

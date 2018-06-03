@@ -30,13 +30,15 @@ public class SensorDataService {
 
     @PostConstruct
     public void initialize(){
-        List<Device> devices = (List<Device>)deviceService.getAllItems();
+        if (soundSensorDataRepository.findAll().isEmpty() && lightSensorDataRepository.findAll().isEmpty()) {
+            List<Device> devices = (List<Device>) deviceService.getAllItems();
 
-        List<SensorData> sensorDatas = new ArrayList<>();
-        saveSensorData("sound",new SoundSensorData(devices.get(0), 13.13));
-        saveSensorData("sound",new SoundSensorData(devices.get(1), 20.13));
-        saveSensorData("sound",new SoundSensorData(devices.get(1), 17.13));
-        saveSensorData("sound",new SoundSensorData(devices.get(2), 17.13));
+            List<SensorData> sensorDatas = new ArrayList<>();
+            saveSensorData("sound", new SoundSensorData(devices.get(0), 13.13));
+            saveSensorData("sound", new SoundSensorData(devices.get(1), 20.13));
+            saveSensorData("sound", new SoundSensorData(devices.get(1), 17.13));
+            saveSensorData("sound", new SoundSensorData(devices.get(2), 17.13));
+        }
     }
 
     @Transactional
@@ -51,8 +53,20 @@ public class SensorDataService {
     public List<SensorData> getDataForLastDays(int nDays){
         List<SensorData> result = new ArrayList<>();
         Timestamp timestamp = TimeUtil.getDaysBefore(nDays);
-        result.addAll(soundSensorDataRepository.findByTimeBefore(timestamp));
-        result.addAll(lightSensorDataRepository.findByTimeBefore(timestamp));
+        result.addAll(soundSensorDataRepository.findByTimeAfter(timestamp));
+        result.addAll(lightSensorDataRepository.findByTimeAfter(timestamp));
         return result;
+    }
+
+
+    @Transactional
+    public List<SensorData> getAll(){
+        List<SensorData> sensorDatas = new ArrayList<>();
+        List<SoundSensorData> allSoundData = soundSensorDataRepository.findAll();
+        List<LightSensorData> allLightData = lightSensorDataRepository.findAll();
+        sensorDatas.addAll(allSoundData);
+        sensorDatas.addAll(allLightData);
+
+        return sensorDatas;
     }
 }

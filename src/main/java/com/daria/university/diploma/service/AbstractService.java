@@ -36,7 +36,7 @@ public abstract class AbstractService<T extends Serializable, ID  extends Serial
 
     @Transactional
     @Override
-    public Iterable<T> getAllItems() {
+    public List<T> getAllItems() {
         return repository.findAll();
     }
 

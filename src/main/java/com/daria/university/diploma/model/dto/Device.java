@@ -1,5 +1,6 @@
 package com.daria.university.diploma.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Device implements IEntity{
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
+    @JsonIgnoreProperties({"longitude", "latitude" })
     private Location location;
 
     @Column(name = "active")

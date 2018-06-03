@@ -2,7 +2,7 @@ APISrv.$inject = ['$http'];
 
 function APISrv($http) {
 
-    var server_uri = "/api/";
+    var server_uri = "";
     var service = {
         getAllSensors : getAllSensors,
         getOldData : getOldData,
