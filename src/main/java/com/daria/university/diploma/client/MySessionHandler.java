@@ -21,7 +21,7 @@ public class MySessionHandler extends StompSessionHandlerAdapter {
         session.subscribe("/sensors/greetings", this);
         //session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
         try {
-            session.send("/app/output", mapper.writeValueAsBytes(new SensorMessage("test", "11")));
+            session.send("/app/output", mapper.writeValueAsBytes(new SensorMessage("test", 0L, "11")));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

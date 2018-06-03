@@ -61,7 +61,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        /*http
                 .authorizeRequests()
                 .antMatchers("/built/**", "/main.css").permitAll()
                 .antMatchers("/admin/**").authenticated()
@@ -74,7 +74,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .logout()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/");*/
     }
 
 }

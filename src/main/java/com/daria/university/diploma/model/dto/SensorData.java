@@ -1,5 +1,6 @@
 package com.daria.university.diploma.model.dto;
 
+import com.daria.university.diploma.utils.TimeUtil;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -23,9 +24,8 @@ public class SensorData implements IEntity{
     public SensorData() {
     }
 
-    public SensorData(Device device, DateTime time) {
+    public SensorData(Device device) {
         this.device = device;
-        this.time = new Timestamp(time.getMillis());
     }
 
     public Long getId() {
@@ -46,5 +46,10 @@ public class SensorData implements IEntity{
 
     public void setTime(DateTime time) {
         this.time = new Timestamp(time.getMillis());
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.time = TimeUtil.getCurrentTime();
     }
 }

@@ -1,6 +1,6 @@
 MainCtr.$inject = ['$scope','$location', 'APISrv'];
 
-function MainCtr($scope, $location,  APISrv) {
+function MainCtr($scope, $location,  APISrv, data) {
 
     var vm = this;
     vm.model = {
@@ -8,10 +8,12 @@ function MainCtr($scope, $location,  APISrv) {
         searchSensor : ''
     };
 
+    vm.data = data || [];
+
     init();
     
     function init() {
-        
+        console.log('init');
     }
     
     vm.gotoRecord = function (id) {
@@ -19,4 +21,4 @@ function MainCtr($scope, $location,  APISrv) {
     }
 }
 
-angular.module('App').controller(MainCtr);
+angular.module('App').controller('MainCtr', MainCtr);

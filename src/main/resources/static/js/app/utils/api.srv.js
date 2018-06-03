@@ -5,6 +5,7 @@ function APISrv($http) {
     var server_uri = "/api/";
     var service = {
         getAllSensors : getAllSensors,
+        getOldData : getOldData,
         getCurrentSensors : getCurrentSensors,
         getSensor : getSensor,
         getLocations : getLocations,
@@ -20,6 +21,9 @@ function APISrv($http) {
         return $http.get(server_uri + '/sensors');
     }
 
+    function getOldData() {
+        return $http.get(server_uri + '/olddata');
+    }
     /* possible states correspond the name of assets : ok, warning and danger (in order of urgency raise)
      * response type :
      * [{"state":"ok","id":1,"name":"abc123", "location":{"longitude":42.3243242, "latitude":..., "label":"Pushkinskaya"}, "type":"sound"}]
@@ -45,4 +49,4 @@ function APISrv($http) {
     }
 }
 
-angular.module('App').service(APISrv);
+angular.module('App').service('APISrv', APISrv);

@@ -6,15 +6,17 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SensorMessage {
-    private String name;
-    private Object data;
-    private String time;
+    protected String name;
+    protected Object data;
+    protected Long sensorId;
+    protected String time;
 
     public SensorMessage() {
     }
 
-    public SensorMessage(String sensorName, Object sensorData) {
+    public SensorMessage(String sensorName, Long sensorId, Object sensorData) {
         this.name = sensorName;
+        this.sensorId = sensorId;
         this.data = sensorData;
         this.time = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME);
     }

@@ -31,6 +31,13 @@ public class Device implements IEntity{
     public Device() {
     }
 
+    public Device(Long id, String label, String type, Location location) {
+        this.id = id;
+        this.label = label;
+        this.type = type;
+        this.location = location;
+    }
+
     public Device(String label, String type, Location location) {
         //this.id = id;
         this.label = label;

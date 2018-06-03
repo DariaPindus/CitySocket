@@ -7,9 +7,21 @@ function Config($stateProvider, $urlRouterProvider) {
             url: '/',
             views: {
                 "main": {
-                    templateUrl: "/resources/app/main/main.html",
-                    controller: 'IndexCtr',
+                    templateUrl: "js/app/main/main.html",
+                    controller: 'MainCtr',
                     controllerAs: 'vm'
+                }
+            },
+            resolve : {
+                data : function(APISrv) {
+                    return APISrv.getOldData().then(function (response) {
+                        if (response.data.success){
+                            return response.data.content;
+                        }
+                    }, 
+                    function (error) {
+                        
+                    });
                 }
             }
         })
@@ -17,8 +29,8 @@ function Config($stateProvider, $urlRouterProvider) {
             url: '/sensor/:id',
             views: {
                 "main": {
-                    templateUrl: "resources/app/editions/edition.html",
-                    controller: 'EditionCtr',
+                    templateUrl: "js/app/sensor/sensor.html",
+                    controller: 'SensorCtr',
                     controllerAs: 'vm'
                 }
             },
@@ -33,7 +45,9 @@ function Config($stateProvider, $urlRouterProvider) {
                     })
                 }
             }
-        })
+        });
+
+    $urlRouterProvider.otherwise("/");
 
 }
 

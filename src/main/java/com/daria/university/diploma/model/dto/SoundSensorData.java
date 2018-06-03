@@ -11,6 +11,13 @@ public class SoundSensorData extends SensorData {
     @Column(name = "dB")
     private double db;
 
+    public SoundSensorData(){}
+
+    public SoundSensorData(Device device, double db){
+        super(device);
+        this.db = db;
+    }
+
     public double getDb() {
         return db;
     }

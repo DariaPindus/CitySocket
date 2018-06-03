@@ -1,28 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"  crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"  crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc1/angular-material.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc1/angular-material.layouts.min.css">
 
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"/>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-loader.min.js"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.18/angular-ui-router.min.js"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc1/angular-material.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"/>-->
+    <link rel="stylesheet"  href="webjars/bootstrap/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="webjars/bootstrap/css/bootstrap-theme.css" type="text/css" />
 
-    <!--ADDONS-->
 
-    <!--MY SCRIPTS-->
+    <!-- 3rd party -->
+    <script src="webjars/jquery/jquery.min.js"></script>
+    <script src="webjars/bootstrap/js/bootstrap.js"></script>
+    <script src="webjars/angular/angular.min.js"></script>
+    <script src="webjars/angular-ui-router/angular-ui-router.min.js"></script>
+    <script src="webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="webjars/webstomp-client/dist/webstomp.js"></script>
+    <script src="webjars/angular-ui-bootstrap-bower/ui-bootstrap.min.js"></script>
+    <script src="webjars/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="/js/app/app.js" ></script>
+    <script src="/js/app/config.js" ></script>
+    <script src="/js/app/main/main.ctr.js" ></script>
+    <script src="/js/app/sensor/sensor.ctr.js" ></script>
+    <script src="/js/app/utils/api.srv.js" ></script>
 
 </head>
 
-<body>
+<body ng-app="App">
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <h5 class="my-0 mr-md-auto font-weight-normal">Project name</h5>
     <nav class="my-2 my-md-0 mr-md-3">
@@ -30,6 +51,10 @@
     </nav>
     <a class="btn btn-outline-primary" href="#">Sign up</a>
 </div>
-<div  ui-view="main" ng-cloack></div>
+<div ui-view="main" ng-cloack></div>
 </body>
+
+<!--<script src="js/app/app.js"/>
+<script src="js/app/config.js"/>-->
+
 </html>

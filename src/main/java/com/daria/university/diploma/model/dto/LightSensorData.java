@@ -11,6 +11,13 @@ public class LightSensorData extends SensorData {
     @Column(name = "luminosity")
     private double luminosity;
 
+    public LightSensorData(){}
+
+    public LightSensorData(Device device, double luminosity){
+        super(device);
+        this.luminosity = luminosity;
+    }
+
     public double getLuminosity() {
         return luminosity;
     }

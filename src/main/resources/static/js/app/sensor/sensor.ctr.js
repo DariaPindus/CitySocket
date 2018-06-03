@@ -16,4 +16,4 @@ function SensorCtr($scope,  $state, $stateParams, sensor, APISrv) {
     }
 }
 
-angular.module('App').controller(SensorCtr);
+angular.module('App').controller('SensorCtr', SensorCtr);
