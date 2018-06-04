@@ -3,6 +3,8 @@ package com.daria.university.diploma.controllers;
 import com.daria.university.diploma.model.UpdateRequestPair;
 import com.daria.university.diploma.model.dto.Device;
 import com.daria.university.diploma.model.dto.SensorData;
+import com.daria.university.diploma.model.messaging.output.ClientMainDisplayMessage;
+import com.daria.university.diploma.model.messaging.output.ClientMainDisplayMessageAdapter;
 import com.daria.university.diploma.service.DeviceService;
 import com.daria.university.diploma.service.SensorDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -55,13 +58,17 @@ public class RestMainController {
     }
 */
     @RequestMapping(value = "/olddata", method = RequestMethod.GET)
-    public ResponseEntity<List<SensorData>> getOldData(@RequestParam(name = "id", defaultValue = "-1", required = false) long id){
-        List<SensorData> resultData;
+    public ResponseEntity<List<ClientMainDisplayMessage>> getOldData(@RequestParam(name = "id", defaultValue = "-1", required = false) long id){
+        List<SensorData> sensorDatas;
         if (id == -1)
-            resultData = dataService.getDataForLastDays(numberOfDays);
+            sensorDatas = dataService.getDataForLastDays(numberOfDays);
         else
-            resultData = dataService.getDataForLastDaysById(numberOfDays, id);
-        return new ResponseEntity<>(resultData, HttpStatus.OK);
+            sensorDatas = dataService.getDataForLastDaysById(numberOfDays, id);
+
+        List<ClientMainDisplayMessage> messages = sensorDatas.stream()
+                .map(sensorData -> new ClientMainDisplayMessageAdapter(sensorData))
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(messages, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/devices", method = RequestMethod.GET)

@@ -9,6 +9,7 @@ import com.daria.university.diploma.model.messaging.output.ClientMainDisplayMess
 import com.daria.university.diploma.model.messaging.output.SensorMessage;
 import com.daria.university.diploma.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ import java.util.stream.Collectors;
 public class MockDataSender {
     @Autowired
     DeviceService deviceService;
+
+    @Value("${app.mock.sending.data:false}")
+    boolean mockActive;
 
     Map<Long, Device> devices = new HashMap<>();
 
@@ -42,13 +46,15 @@ public class MockDataSender {
 
     @Scheduled(fixedDelay = 10000)
     public void sendMockData(){
-        devices.forEach((key, val)->{
+        if (mockActive) {
+            devices.forEach((key, val) -> {
                 SensorMessage mess = getMockMessage(val);
-            System.out.println("mesage " + mess.getName() + " " + mess.getData() + " " + mess.getTime());
-            double rand = new Random().nextDouble() * 100;
-            ClientMainDisplayMessage message = new ClientMainDisplayMessageAdapter(new SoundSensorData(val, rand));
+                System.out.println("mesage " + mess.getName() + " " + mess.getData() + " " + mess.getTime());
+                double rand = new Random().nextDouble() * 100;
+                ClientMainDisplayMessage message = new ClientMainDisplayMessageAdapter(new SoundSensorData(val, rand));
                 messagingTemplate.convertAndSend("/city/display", message);
-        });
+            });
+        }
     }
 
     public SensorMessage getMockMessage(Device d){;

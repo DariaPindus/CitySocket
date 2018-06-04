@@ -15,8 +15,8 @@ function Config($stateProvider, $urlRouterProvider) {
             resolve : {
                 data : function(APISrv) {
                     return APISrv.getOldData().then(function (response) {
-                        if (response.data.success){
-                            return response.data.content;
+                        if (response.data){
+                            return response.data;
                         }
                     }, 
                     function (error) {

@@ -25,6 +25,7 @@ public class WebsocketMainController {
 
     @MessageMapping("/output")
     @SendTo("/city/display")
+    //TODO: add binding from DB
     public ClientMainDisplayMessage first(SensorMessage message) throws Exception {
         System.out.println("::::::::::::Received hello IN FIRST: {}::::::::::::" +  message);
         //return new ClientMainDisplayMessage(Integer.valueOf((String)message.getData()));
