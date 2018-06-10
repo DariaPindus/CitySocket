@@ -65,12 +65,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="data in vm.datalist" class="{{data.state}}">
+                <tr ng-repeat="item in vm.data" class="{{item.state}}">
                     <td>
-                        {{data.time}}
+                        {{item.time | date:'medium'}}
                     </td>
                     <td>
-                        Column content
+                        {{item.value}}
                     </td>
                 </tr>
                 </tbody>

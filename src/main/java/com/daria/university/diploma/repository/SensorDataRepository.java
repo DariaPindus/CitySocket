@@ -18,6 +18,6 @@ public interface SensorDataRepository<E extends SensorData, ID extends Serializa
     @Query("select s from #{#entityName} as s where s.time > ?1 ")
     List<E> findByTimeAfter(Timestamp after);
 
-    @Query("select s from #{#entityName} as s where s.device=?1 and s.time > ?2 order by s.time desc")
+    @Query("select s from #{#entityName} as s where s.device.id=?1 and s.time > ?2 order by s.time desc")
     List<E> findByDeviceAndTimeAfter(Long id, Timestamp after);
 }
