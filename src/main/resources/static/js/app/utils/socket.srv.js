@@ -1,7 +1,7 @@
 SocketSrv.$inject = ['StompClient', '$q', '$timeout'];
 
 function SocketSrv(StompClient, $q,  $timeout){
-    var SERVER_URL = "ws://localhost:8181/output";
+    /*var SERVER_URL = "ws://localhost:8181/output";*/
     var  listener = $q.defer(),
         socket = {
             client: null,
@@ -11,7 +11,7 @@ function SocketSrv(StompClient, $q,  $timeout){
 
     var service = {
         RECONNECT_TIMEOUT : 30000,
-        SOCKET_URL : "ws://localhost:8181/output",
+        SOCKET_URL : "ws://ec2-52-26-79-62.us-west-2.compute.amazonaws.com:8181/output", /*localhost*/
         INCOMING_URL : "/city/display",
 
         initialize : initialize,
