@@ -1,5 +1,5 @@
 
-function SensorCtr($scope,  $state, $stateParams, SocketSrv, APISrv, sensor) {
+function SensorCtr($scope,  $state, $stateParams, $mdDialog, SocketSrv, APISrv, sensor) {
     var vm = this;
     vm.id = $stateParams.id;
     vm.sensor = sensor;
