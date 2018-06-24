@@ -11,7 +11,7 @@ function SocketSrv(StompClient, $q,  $timeout){
 
     var service = {
         RECONNECT_TIMEOUT : 30000,
-        SOCKET_URL : "ws://localhost:8181/output",  //"/spring-ng-chat/chat", ws://localhost:8181
+        SOCKET_URL : "ws://localhost:8181/output",
         INCOMING_URL : "/city/display",
 
         initialize : initialize,
